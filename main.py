@@ -106,8 +106,16 @@ def click_tile(tile):
         Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=tile.y,column=tile.x,sticky=E)
     print(key, ':', tiles[key].get_status(), check_neighbors(tiles[key].x, tiles[key].y))
 
-
-
+def draw_board(width, height):
+    for i in range(width):
+    for j in range(height):
+        coords = f'{i}, {j}'
+        tiles[coords] = Tile(i, j)
+        click_with_self = partial(click_tile, tiles[coords])
+        if tiles[coords].get_status():
+            Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
+        else:
+            Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
 
 window = Tk()
 window.title("Conway's Game of Life")
@@ -117,10 +125,11 @@ empty_tile = PhotoImage(file="empty_tile.gif")
 window.configure(background = "black")
 
 # Initialize board
-x, y = 10, 10
+width, height = 10, 10
 
-for i in range(x):
-    for j in range(y):
+# TODO: replace with draw_board()
+for i in range(width):
+    for j in range(height):
         coords = f'{i}, {j}'
         tiles[coords] = Tile(i, j)
         click_with_self = partial(click_tile, tiles[coords])
