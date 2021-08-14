@@ -65,6 +65,7 @@ def cycle_board():
         weighted_board[key] = neighbors
 
     for key in tiles.keys():
+        click_with_self = partial(click_tile, tiles[key])
         x, y = tiles[key].x, tiles[key].y
         if weighted_board[key] == 3 and not tiles[key].get_status():
             tiles[key].live()
