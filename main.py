@@ -62,7 +62,7 @@ def cycle_board():
 #key down function
 def start_click():
     print('starting life...')
-    i = 500
+    i = 50
     while i > 0:
         time.sleep(.25)
         print(i)
