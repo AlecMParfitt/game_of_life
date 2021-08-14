@@ -1,3 +1,11 @@
+'''
+simple implementation of Conway's Game of Life
+
+@author Alec Parfitt
+
+'''
+
+
 from tkinter import *
 from Tile import Tile
 from functools import partial
