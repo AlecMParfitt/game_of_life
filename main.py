@@ -79,7 +79,7 @@ def cycle_board():
 #key down function
 def start_click():
     """
-    Key down function for beginning the game of life. proceeds through i rounds of the game
+    key down function for beginning the game of life. proceeds through i rounds of the game
     """
     print('starting life...')
     i = 50
@@ -127,17 +127,19 @@ window.configure(background = "black")
 # Initialize board
 width, height = 10, 10
 
-# TODO: replace with draw_board()
-for i in range(width):
-    for j in range(height):
-        coords = f'{i}, {j}'
-        tiles[coords] = Tile(i, j)
-        click_with_self = partial(click_tile, tiles[coords])
-        if tiles[coords].get_status():
-            Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
-        else:
-            Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
-#################################################################################################################
+draw_board(width, height)
+
+# # TODO: replace with draw_board()
+# for i in range(width):
+#     for j in range(height):
+#         coords = f'{i}, {j}'
+#         tiles[coords] = Tile(i, j)
+#         click_with_self = partial(click_tile, tiles[coords])
+#         if tiles[coords].get_status():
+#             Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
+#         else:
+#             Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
+# #################################################################################################################
 
 # start button
 Button(window, text="start", width=7, command=start_click).grid(row=y//2, column=x, sticky=S)
