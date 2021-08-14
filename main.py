@@ -49,13 +49,13 @@ def cycle_board():
         weighted_board[key] = neighbors
 
     for key in tiles.keys():
-        y, x = tiles[key].x, tiles[key].y
+        x, y = tiles[key].x, tiles[key].y
         if weighted_board[key] == 3 and not tiles[key].get_status():
             tiles[key].live()
-            Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=x,column=y,sticky=E)
+            Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=y,column=x,sticky=E)
         if tiles[key].get_status() and (weighted_board[key] < 2 or weighted_board[key] > 3):
             tiles[key].die()
-            Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=x,column=y,sticky=E)
+            Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=y,column=x,sticky=E)
     window.update()
 
 
