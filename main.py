@@ -1,6 +1,10 @@
 '''
 simple implementation of Conway's Game of Life
 
+Rules:
+    1. any dead cell with exactly 3 live neighbors comes to life
+    2. any live cell with <2 or >3 live neighbors dies
+
 @author Alec Parfitt
 
 '''
@@ -14,9 +18,16 @@ tiles = {}
 widgets = {}
 
 def make_key(x,y):
+    """
+    function to combine two coordinates into a valid dict key
+    """
     return f'{x}, {y}'
 
 def check_neighbors(x,y):
+    """
+    checks the grid around a tile at given x, y coords. Tkinter grid is laid out
+    like quadrant IV of a graph
+    """
     total = 0
     locations = {
         'ul' : make_key(x-1, y-1),
@@ -39,6 +50,11 @@ def check_neighbors(x,y):
 
 
 def cycle_board():
+    """
+    Definition for 1 round of the game of life. weighted_board is a dict<coord, num_neighbors>
+    for all positions on the board. This dict is used to redraw the board quickly. Tkinter
+    buttons must be redefined in order for changes to be reflected.
+    """
     weighted_board = {}
     for key in tiles.keys():
         x, y = tiles[key].x, tiles[key].y
@@ -61,6 +77,9 @@ def cycle_board():
 
 #key down function
 def start_click():
+    """
+    Key down function for beginning the game of life. proceeds through i rounds of the game
+    """
     print('starting life...')
     i = 50
     while i > 0:
@@ -72,6 +91,10 @@ def start_click():
         print(key, value)
 
 def click_tile(tile):
+    """
+    key down function for a tile being clicked. When the tile is clicked, it is set to its
+    opposite state and the button image is switched. filled == alive; empty == dead
+    """
     key = f'{tile.x}, {tile.y}'
     tiles[key].switch()
     click_with_self = partial(click_tile, tiles[key])
@@ -104,11 +127,9 @@ for i in range(x):
             Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
         else:
             Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
-#################################################################################################
+#################################################################################################################
 
+# start button
 Button(window, text="start", width=7, command=start_click).grid(row=y//2, column=x, sticky=S)
-
-
-
 
 window.mainloop()
