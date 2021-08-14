@@ -26,7 +26,7 @@ def make_key(x,y):
 def check_neighbors(x,y):
     """
     checks the grid around a tile at given x, y coords. Tkinter grid is laid out
-    like quadrant IV of a graph
+    like quadrant IV of a graph. ul -> upper left; um -> upper middle; etc
     """
     total = 0
     locations = {
@@ -46,8 +46,6 @@ def check_neighbors(x,y):
         except KeyError:
             pass
     return total
-
-
 
 def cycle_board():
     """
