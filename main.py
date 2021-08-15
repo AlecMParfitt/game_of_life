@@ -57,9 +57,6 @@ def cycle_board():
     for key in tiles.keys():
         x, y = tiles[key].x, tiles[key].y
         neighbors = check_neighbors(x,y)
-
-        if tiles[key].get_status():
-            print(key, neighbors)
         weighted_board[key] = neighbors
 
     for key in tiles.keys():
@@ -67,10 +64,10 @@ def cycle_board():
         x, y = tiles[key].x, tiles[key].y
         if weighted_board[key] == 3 and not tiles[key].get_status():
             tiles[key].live()
-            Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=y,column=x,sticky=E)
+            Button(window, image=filled_tile, bg="white", command=click_with_self).grid(row=y,column=x,sticky=E)
         if tiles[key].get_status() and (weighted_board[key] < 2 or weighted_board[key] > 3):
             tiles[key].die()
-            Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=y,column=x,sticky=E)
+            Button(window, image=empty_tile, bg="white", command=click_with_self).grid(row=y,column=x,sticky=E)
     window.update()
 
 
@@ -80,7 +77,7 @@ def start_click():
     key down function for beginning the game of life. proceeds through i rounds of the game
     """
     print('starting life...')
-    iterations = 70
+    iterations = 100
     for i in range(iterations):
         time.sleep(.15)
         print("iteration:", i)
@@ -97,9 +94,9 @@ def click_tile(tile):
     click_with_self = partial(click_tile, tiles[key])
 
     if tiles[key].get_status():
-        Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=tile.y,column=tile.x,sticky=E)
+        Button(window, image=filled_tile, bg="white", command=click_with_self).grid(row=tile.y,column=tile.x,sticky=E)
     else:
-        Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=tile.y,column=tile.x,sticky=E)
+        Button(window, image=empty_tile, bg="white", command=click_with_self).grid(row=tile.y,column=tile.x,sticky=E)
     print(key, ':', tiles[key].get_status(), check_neighbors(tiles[key].x, tiles[key].y))
 
 def draw_board(width, height):
@@ -109,9 +106,9 @@ def draw_board(width, height):
             tiles[coords] = Tile(i, j)
             click_with_self = partial(click_tile, tiles[coords])
             if tiles[coords].get_status():
-                Button(window, image=filled_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
+                Button(window, image=filled_tile, bg="white", command=click_with_self).grid(row=j,column=i,sticky=E)
             else:
-                Button(window, image=empty_tile, bg="grey", command=click_with_self).grid(row=j,column=i,sticky=E)
+                Button(window, image=empty_tile, bg="white", command=click_with_self).grid(row=j,column=i,sticky=E)
 
 window = Tk()
 window.title("Conway's Game of Life")
@@ -121,7 +118,7 @@ empty_tile = PhotoImage(file="empty_tile.gif")
 window.configure(background = "black")
 
 # Initialize board
-width, height = 15, 15
+width, height = 30, 18
 
 draw_board(width, height)
 
